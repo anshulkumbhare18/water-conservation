@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz | Jal Sanrakshan</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <header class="hero">
+        <h1>Test your knowledge</h1>
+        <p>Six questions with instant answers and a final score.</p>
+    </header>
+    <main class="wrap">
+        <div id="box"></div>
+        <p id="score" aria-live="polite"></p><button class="btn" id="re" style="display:none;margin-top:12px">Try
+            again</button>
+    </main>
+    <script src="assets/common.js"></script>
+    <script>
+        const Q = [["Which method sends rooftop rain into tanks or recharge pits?", ["Drip irrigation", "Rainwater harvesting", "Flood irrigation", "Desalination"], 1, "Rainwater harvesting collects and stores rain or recharges groundwater."],
+        ["Which irrigation method delivers water directly to plant roots?", ["Drip irrigation", "Canal flooding", "Surface spreading", "Sprinkling a lawn"], 0, "Drip systems release water drop by drop at the root zone."],
+        ["Which of these is greywater?", ["Toilet flush water", "Water from hand washing and bathing", "Sea water", "Sewage"], 1, "Greywater is lightly used water from basins, showers and laundry."],
+        ["Why are groundwater levels falling in many regions?", ["Too many lakes", "Extraction is higher than recharge", "Too much snowfall", "Water turns to air"], 1, "Pumping out more than rain refills drops the water table."],
+        ["Approximately how much of Earth's water is salty?", ["About 50%", "About 75%", "About 97%", "About 10%"], 2, "About 97% is ocean water. Only a small part is usable freshwater."],
+        ["Which scheme focuses on rural household tap water?", ["Jal Jeevan Mission", "Namami Gange", "Digital India", "Make in India"], 0, "Jal Jeevan Mission aims to provide tap water to rural households."]];
+        let sc, an;
+        function start() { sc = 0; an = 0; score.textContent = ""; re.style.display = "none"; box.innerHTML = ""; Q.forEach((q, i) => { const d = document.createElement("div"); d.className = "q"; d.innerHTML = `<b>Q${i + 1}. ${q[0]}</b>` + q[1].map((o, j) => `<button class="opt" data-i="${j}">${o}</button>`).join("") + `<div class="why"></div>`; d.querySelectorAll(".opt").forEach(b => b.onclick = () => { const p = +b.dataset.i; d.querySelectorAll(".opt").forEach((x, k) => { x.disabled = true; if (k === q[2]) x.classList.add("right") }); if (p !== q[2]) b.classList.add("wrong"); else sc++; const w = d.querySelector(".why"); w.style.display = "block"; w.textContent = (p === q[2] ? "Correct. " : "Not quite. ") + q[3]; an++; score.textContent = an === Q.length ? `Final score: ${sc} / ${Q.length}. ` + (sc >= 5 ? "Excellent!" : sc >= 3 ? "Good effort!" : "Revisit the Learn page and try again.") : `Score so far: ${sc} / ${an}`; if (an === Q.length) re.style.display = "inline-block" }); box.appendChild(d) }) }
+        re.onclick = () => { start(); scrollTo(0, 0) }; start();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schemes | Jal Sanrakshan</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <header class="hero">
+        <h1>Government initiatives</h1>
+        <p>Click a scheme to expand it, then open the official website or search more.</p>
+    </header>
+    <main class="wrap">
+        <div class="acc" id="acc"></div>
+    </main>
+    <script src="assets/common.js"></script>
+    <script>
+        const s = [["Jal Shakti Abhiyan: Catch the Rain", "Campaign promoting rainwater harvesting and conservation across districts.", "https://jalshakti-dowr.gov.in"], ["Jal Jeevan Mission", "Aims to give safe tap water to rural households, with focus on source sustainability.", "https://jaljeevanmission.gov.in"], ["Atal Bhujal Yojana", "Sustainable groundwater management with community participation in water-stressed areas.", "https://cgwb.gov.in"], ["Amrit Sarovar Mission", "Develops and rejuvenates ponds in every district to store rain and recharge groundwater.", ""], ["Namami Gange", "Integrated programme to clean and protect the Ganga and its tributaries.", ""]];
+        const a = document.getElementById("acc");
+        a.innerHTML = s.map(x => `<button class="h" aria-expanded="false"><span>${x[0]}</span><span>+</span></button><div class="body"><p>${x[1]}</p><div class="links" style="margin-top:10px">${x[2] ? ext(x[2], "Official website") : ""}${ext(G(x[0]), "Google")}${ext(YT(x[0]), "YouTube")}</div></div>`).join("");
+        a.querySelectorAll(".h").forEach(b => b.onclick = () => { const o = b.classList.toggle("open"); b.setAttribute("aria-expanded", o); b.lastElementChild.textContent = o ? "-" : "+" });
+    </script>
+</body>
+
+</html>

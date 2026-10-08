@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tracker | Jal Sanrakshan</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <header class="hero">
+        <h1>My water-saving tracker</h1>
+        <p>Tick the habits you follow. The tank fills with your estimated daily saving. Figures are approximate and for
+            awareness.</p>
+    </header>
+    <main class="wrap">
+        <div class="tracker">
+            <div class="habits" id="hb"></div>
+            <div class="tankbox">
+                <div class="tank" aria-hidden="true">
+                    <div class="fill" id="fill"></div>
+                </div>
+                <p><b id="d">0</b> litres saved per day</p>
+                <p><b id="mo">0</b> litres per month</p>
+                <p id="v" aria-live="polite">Tick a habit to begin.</p>
+            </div>
+        </div>
+        <div class="calc">
+            <h2>Daily use calculator</h2>
+            <p>Enter your numbers to estimate a rough daily use.</p>
+            <div class="row"><label for="b">Buckets for bathing (about 15 L each)</label><input id="b" type="number"
+                    min="0" value="2"></div>
+            <div class="row"><label for="w">Washing machine loads (about 50 L each)</label><input id="w" type="number"
+                    min="0" value="1"></div>
+            <div class="row"><label for="c">Cooking, drinking and dishes (litres)</label><input id="c" type="number"
+                    min="0" value="30"></div>
+            <button class="btn" id="go">Calculate</button>
+            <p id="res" style="margin-top:12px;font-weight:700" aria-live="polite"></p>
+        </div>
+    </main>
+    <script src="assets/common.js"></script>
+    <script>
+        const h = [["Close the tap while brushing", 6], ["Use a bucket instead of a long shower", 40], ["Fix a dripping tap or pipe", 20], ["Run washing machine only with a full load", 30], ["Reuse RO reject water for mopping or plants", 10], ["Wash vehicle with a bucket, not a pipe", 100], ["Water plants early morning with a can", 15]];
+        const MAX = h.reduce((a, x) => a + x[1], 0), hb = document.getElementById("hb");
+        hb.innerHTML = h.map(x => `<label><input type="checkbox" data-l="${x[1]}"> ${x[0]}<span class="l">~${x[1]} L</span></label>`).join("");
+        hb.onchange = () => { let s = 0; hb.querySelectorAll("input:checked").forEach(c => s += +c.dataset.l); d.textContent = s; mo.textContent = s * 30; fill.style.height = Math.round(s / MAX * 100) + "%"; v.textContent = !s ? "Tick a habit to begin." : s < 50 ? "Good start. Add more habits." : s < 150 ? "Great! You are saving a lot of water." : "Excellent! You are a water champion." };
+        go.onclick = () => { const t = b.value * 15 + w.value * 50 + +c.value; res.textContent = `Estimated use: ${t} litres per day (${t * 30} litres per month). ` + (t > 135 ? "This is above a commonly quoted 135 L per person guideline. Try the habits above." : "Nice, this is within a commonly quoted 135 L per person guideline.") };
+    </script>
+</body>
+
+</html>

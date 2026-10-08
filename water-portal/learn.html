@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learn | Jal Sanrakshan</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <header class="hero">
+        <h1>Learn the methods</h1>
+        <p>Pick a method to see how it works, where it is used, and open more details online.</p>
+    </header>
+    <main class="wrap">
+        <div class="tabs" id="tabs" role="tablist"></div>
+        <div class="panel" id="panel" aria-live="polite"></div>
+    </main>
+    <script src="assets/common.js"></script>
+    <script>
+        const m = [
+            { t: "Rainwater harvesting", w: "Rainwater_harvesting", q: "rainwater harvesting methods", what: "Collecting rain from rooftops and open land and storing it in tanks, or sending it underground to recharge wells.", how: ["Roof catches rain and gutters carry it to a filter", "Filtered water goes to a tank or recharge pit", "Excess water recharges the borewell or well"], use: "Homes, colleges, apartments, factories." },
+            { t: "Drip irrigation", w: "Drip_irrigation", q: "drip irrigation system how it works", what: "Delivers water slowly, drop by drop, directly to plant roots through pipes with small emitters.", how: ["Pump and filter feed a main pipe", "Lateral pipes run along crop rows", "Emitters release water at the root zone"], use: "Farms, orchards, gardens. Cuts evaporation and runoff." },
+            { t: "Greywater recycling", w: "Greywater", q: "greywater recycling system", what: "Reusing lightly used water from bathing, hand washing and laundry (not toilet water).", how: ["Collect water from basins, showers and washing machines", "Pass it through a filter or settling tank", "Use it for plants, flushing or cleaning"], use: "Hostels, hotels, housing societies, colleges." },
+            { t: "Watershed management", w: "Watershed_management", q: "watershed management India", what: "Managing land, soil and water of a whole catchment so rain soaks in and is stored.", how: ["Build contour bunds and check dams", "Plant trees and grass to hold soil", "Dig farm ponds and percolation tanks"], use: "Villages and drought-prone regions." },
+            { t: "Leak control", w: "Water_conservation", q: "how to save water at home", what: "Finding and fixing leaks, using efficient fixtures and tracking consumption.", how: ["Check taps, pipes and tanks regularly", "Install aerators and dual-flush systems", "Use meters to track use"], use: "Every home, school and office. The cheapest method." }];
+        makeTabs(document.getElementById("tabs"), m, x => { document.getElementById("panel").innerHTML = `<h2>${x.t}</h2><p>${x.what}</p><p><b>How it works</b></p><ul>${x.how.map(h => `<li>${h}</li>`).join("")}</ul><p><b>Where it is used:</b> ${x.use}</p><p style="margin:14px 0 8px"><b>Learn more online</b></p>${linkRow(x.q, x.w)}` });
+    </script>
+</body>
+
+</html>

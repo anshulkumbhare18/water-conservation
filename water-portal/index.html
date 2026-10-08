@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jal Sanrakshan | Water Conservation Portal</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <header class="hero">
+        <h1>Water Conservation and Sustainable Water Management</h1>
+        <p>A student portal to learn, track, test and explore. Click any topic and real information opens in a new tab.
+        </p>
+        <form class="search" id="sf" role="search"><input id="q" placeholder="e.g. rainwater harvesting in Nagpur"
+                aria-label="Search" required><button class="btn" type="submit">Search on Google</button></form>
+    </header>
+    <div class="stats">
+        <div class="stat"><b data-n="97">0</b>% of Earth's water is salty</div>
+        <div class="stat"><b data-n="17">0</b>% of world population is in India</div>
+        <div class="stat"><b data-n="4">0</b>% of world freshwater is in India</div>
+        <div class="stat"><b data-n="80">0</b>% farming share of water use (approx.)</div>
+    </div>
+    <main class="wrap">
+        <div class="fod"><b>Water fact of the day</b>
+            <p id="fod"></p>
+        </div>
+        <h2>Explore the portal</h2>
+        <p class="lead">Five sections, each with something to click and do.</p>
+        <div class="grid" id="sec"></div>
+        <h2>Trending topics</h2>
+        <p class="lead">Each card opens Google, Images, YouTube or Wikipedia in a new tab.</p>
+        <div class="grid" id="tp"></div>
+    </main>
+    <script src="assets/common.js"></script>
+    <script>
+        const facts = ["A dripping tap can waste many litres of water every day.", "India has about 17% of the world's people but only about 4% of its freshwater.", "Drip irrigation delivers water straight to plant roots and cuts wastage.", "Rain falls in only a few monsoon months in India, so storing it is vital.", "Greywater from basins and showers can be reused for plants and flushing.", "Groundwater levels fall when we pump out more than rain can refill."];
+        document.getElementById("fod").textContent = facts[new Date().getDate() % facts.length];
+        const sec = [["learn.html", "Learn", "Five conservation methods explained with step-by-step working."], ["tracker.html", "Tracker", "Tick habits, fill the tank, and calculate your daily water use."], ["schemes.html", "Schemes", "Government initiatives with links to official sites."], ["quiz.html", "Quiz", "Test yourself with instant answers and a final score."], ["resources.html", "Resources", "Google, YouTube and official sources for every topic."]];
+        document.getElementById("sec").innerHTML = sec.map(s => `<article class="card"><h3>${s[1]}</h3><p>${s[2]}</p><div class="links"><a href="${s[0]}">Open ${s[1]}</a></div></article>`).join("");
+        const tp = [["Water scarcity", "water scarcity causes and solutions", "Water_scarcity"], ["Rainwater harvesting", "rainwater harvesting methods", "Rainwater_harvesting"], ["Groundwater depletion", "groundwater depletion India", "Groundwater_depletion"]];
+        document.getElementById("tp").innerHTML = tp.map(t => `<article class="card"><h3>${t[0]}</h3>${linkRow(t[1], t[2])}</article>`).join("");
+        document.getElementById("sf").onsubmit = e => { e.preventDefault(); const v = q.value.trim(); if (v) window.open(G(v + " water conservation"), "_blank", "noopener") };
+        document.querySelectorAll("[data-n]").forEach(el => { const n = +el.dataset.n; let c = 0; const t = setInterval(() => { c++; el.textContent = c; if (c >= n) clearInterval(t) }, Math.max(12, 900 / n)) });
+    </script>
+</body>
+
+</html>
