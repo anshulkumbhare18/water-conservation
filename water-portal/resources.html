@@ -4,30 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Resources | Jal Sanrakshan</title>
+    <title>Jal Sanrakshan | Water Conservation Portal</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
     <header class="hero">
-        <h1>Resources</h1>
-        <p>Every card opens real information in a new tab.</p>
-        <form class="search" id="sf"><input id="q" placeholder="Search any water topic" aria-label="Search"
-                required><button class="btn" type="submit">Search on Google</button></form>
+        <h1 data-t="rsH"></h1>
+        <p data-t="rsP"></p>
+        <form class="search" id="sf"><input id="q" data-ph="ph" aria-label="Search" required><button class="btn"
+                type="submit" data-t="sb"></button></form>
     </header>
     <main class="wrap">
-        <h2>Topics</h2>
+        <h2 data-t="rsT"></h2>
         <div class="grid" id="tp"></div>
-        <h2>Official websites</h2>
+        <h2 data-t="rsO"></h2>
         <div class="grid" id="gv"></div>
     </main>
     <script src="assets/common.js"></script>
     <script>
-        const t = [["Water scarcity", "Why usable freshwater is limited.", "water scarcity causes and solutions", "Water_scarcity"], ["Water conservation", "Ways to use less water.", "water conservation methods", "Water_conservation"], ["Rainwater harvesting", "Collect and store rain.", "rainwater harvesting methods", "Rainwater_harvesting"], ["Drip irrigation", "Efficient farm watering.", "drip irrigation system", "Drip_irrigation"], ["Greywater recycling", "Reuse bathing and washing water.", "greywater recycling system", "Greywater"], ["Watershed management", "Manage the whole catchment.", "watershed management India", "Watershed_management"], ["Groundwater depletion", "Falling water tables.", "groundwater depletion India", "Groundwater_depletion"], ["Wastewater treatment", "Cleaning used water.", "wastewater treatment process", "Sewage_treatment"], ["Water pollution", "Effects on rivers and drinking water.", "water pollution causes effects", "Water_pollution"]];
-        tp.innerHTML = t.map(x => `<article class="card"><h3>${x[0]}</h3><p>${x[1]}</p>${linkRow(x[2], x[3])}</article>`).join("");
-        const g = [["Ministry of Jal Shakti", "Water resources, river development and Ganga rejuvenation.", "https://jalshakti-dowr.gov.in"], ["Jal Jeevan Mission", "Tap water for rural households.", "https://jaljeevanmission.gov.in"], ["Central Ground Water Board", "Groundwater data and reports in India.", "https://cgwb.gov.in"], ["UN SDG 6", "Global goal for clean water and sanitation.", "https://sdgs.un.org/goals/goal6"]];
-        gv.innerHTML = g.map(x => `<article class="card"><h3>${x[0]}</h3><p>${x[1]}</p><div class="links">${ext(x[2], "Open website")}</div></article>`).join("");
+        const GV = [[["Ministry of Jal Shakti", "जल शक्ति मंत्रालय", "जलशक्ती मंत्रालय"], ["Water resources, river development and Ganga rejuvenation.", "जल संसाधन, नदी विकास और गंगा संरक्षण।", "जलसंपदा, नदी विकास व गंगा पुनरुज्जीवन."], "https://jalshakti-dowr.gov.in"],
+        [["Jal Jeevan Mission", "जल जीवन मिशन", "जल जीवन मिशन"], ["Tap water for rural households.", "ग्रामीण घरों में नल से जल।", "ग्रामीण घरांना नळाने पाणी."], "https://jaljeevanmission.gov.in"],
+        [["Central Ground Water Board", "केंद्रीय भूजल बोर्ड", "केंद्रीय भूजल मंडळ"], ["Groundwater data and reports in India.", "भारत में भूजल के आंकड़े और रिपोर्ट।", "भारतातील भूजल आकडेवारी व अहवाल."], "https://cgwb.gov.in"],
+        [["UN SDG 6", "संयुक्त राष्ट्र SDG 6", "संयुक्त राष्ट्र SDG 6"], ["Global goal for clean water and sanitation.", "स्वच्छ पानी और स्वच्छता का वैश्विक लक्ष्य।", "स्वच्छ पाणी व स्वच्छतेचे जागतिक उद्दिष्ट."], "https://sdgs.un.org/goals/goal6"]];
+        function draw() {
+            tp.innerHTML = TOPICS.map(x => `<article class="card"><h3>${T(x[0])}</h3><p>${T(x[1])}</p>${linkRow(x[2], x[3])}</article>`).join("");
+            gv.innerHTML = GV.map(x => `<article class="card"><h3>${T(x[0])}</h3><p>${T(x[1])}</p><div class="links">${ext(x[2], T(S.ow))}</div></article>`).join("");
+        }
         sf.onsubmit = e => { e.preventDefault(); const v = q.value.trim(); if (v) window.open(G(v + " water conservation"), "_blank", "noopener") };
+        setLang(LI);
     </script>
 </body>
 
