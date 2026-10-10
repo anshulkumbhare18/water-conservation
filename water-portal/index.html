@@ -10,39 +10,44 @@
 
 <body>
     <header class="hero">
-        <h1>Water Conservation and Sustainable Water Management</h1>
-        <p>A student portal to learn, track, test and explore. Click any topic and real information opens in a new tab.
-        </p>
-        <form class="search" id="sf" role="search"><input id="q" placeholder="e.g. rainwater harvesting in Nagpur"
-                aria-label="Search" required><button class="btn" type="submit">Search on Google</button></form>
+        <h1 data-t="fTopic"></h1>
+        <p data-t="hP"></p>
+        <form class="search" id="sf" role="search"><input id="q" data-ph="ph" aria-label="Search" required><button
+                class="btn" type="submit" data-t="sb"></button></form>
     </header>
     <div class="stats">
-        <div class="stat"><b data-n="97">0</b>% of Earth's water is salty</div>
-        <div class="stat"><b data-n="17">0</b>% of world population is in India</div>
-        <div class="stat"><b data-n="4">0</b>% of world freshwater is in India</div>
-        <div class="stat"><b data-n="80">0</b>% farming share of water use (approx.)</div>
+        <div class="stat"><b data-n="97">0%</b><span data-t="st1"></span></div>
+        <div class="stat"><b data-n="17">0%</b><span data-t="st2"></span></div>
+        <div class="stat"><b data-n="4">0%</b><span data-t="st3"></span></div>
+        <div class="stat"><b data-n="80">0%</b><span data-t="st4"></span></div>
     </div>
     <main class="wrap">
-        <div class="fod"><b>Water fact of the day</b>
+        <div class="fod"><b data-t="hFod"></b>
             <p id="fod"></p>
         </div>
-        <h2>Explore the portal</h2>
-        <p class="lead">Five sections, each with something to click and do.</p>
+        <h2 data-t="hExp"></h2>
+        <p class="lead" data-t="hExpP"></p>
         <div class="grid" id="sec"></div>
-        <h2>Trending topics</h2>
-        <p class="lead">Each card opens Google, Images, YouTube or Wikipedia in a new tab.</p>
+        <h2 data-t="hTr"></h2>
+        <p class="lead" data-t="hTrP"></p>
         <div class="grid" id="tp"></div>
     </main>
     <script src="assets/common.js"></script>
     <script>
-        const facts = ["A dripping tap can waste many litres of water every day.", "India has about 17% of the world's people but only about 4% of its freshwater.", "Drip irrigation delivers water straight to plant roots and cuts wastage.", "Rain falls in only a few monsoon months in India, so storing it is vital.", "Greywater from basins and showers can be reused for plants and flushing.", "Groundwater levels fall when we pump out more than rain can refill."];
-        document.getElementById("fod").textContent = facts[new Date().getDate() % facts.length];
-        const sec = [["learn.html", "Learn", "Five conservation methods explained with step-by-step working."], ["tracker.html", "Tracker", "Tick habits, fill the tank, and calculate your daily water use."], ["schemes.html", "Schemes", "Government initiatives with links to official sites."], ["quiz.html", "Quiz", "Test yourself with instant answers and a final score."], ["resources.html", "Resources", "Google, YouTube and official sources for every topic."]];
-        document.getElementById("sec").innerHTML = sec.map(s => `<article class="card"><h3>${s[1]}</h3><p>${s[2]}</p><div class="links"><a href="${s[0]}">Open ${s[1]}</a></div></article>`).join("");
-        const tp = [["Water scarcity", "water scarcity causes and solutions", "Water_scarcity"], ["Rainwater harvesting", "rainwater harvesting methods", "Rainwater_harvesting"], ["Groundwater depletion", "groundwater depletion India", "Groundwater_depletion"]];
-        document.getElementById("tp").innerHTML = tp.map(t => `<article class="card"><h3>${t[0]}</h3>${linkRow(t[1], t[2])}</article>`).join("");
-        document.getElementById("sf").onsubmit = e => { e.preventDefault(); const v = q.value.trim(); if (v) window.open(G(v + " water conservation"), "_blank", "noopener") };
-        document.querySelectorAll("[data-n]").forEach(el => { const n = +el.dataset.n; let c = 0; const t = setInterval(() => { c++; el.textContent = c; if (c >= n) clearInterval(t) }, Math.max(12, 900 / n)) });
+        const F = [["A dripping tap can waste many litres of water every day.", "एक टपकता नल रोज़ कई लीटर पानी बर्बाद कर सकता है।", "गळणारा नळ रोज अनेक लिटर पाणी वाया घालवू शकतो."],
+        ["India has about 17% of the world's people but only about 4% of its freshwater.", "भारत में दुनिया की लगभग 17% आबादी है, लेकिन मीठे पानी का सिर्फ लगभग 4% है।", "जगाची सुमारे 17% लोकसंख्या भारतात आहे, पण गोड्या पाण्याचा फक्त सुमारे 4% साठा आहे."],
+        ["Drip irrigation delivers water straight to plant roots and cuts wastage.", "ड्रिप सिंचाई पानी सीधे जड़ों तक पहुंचाती है और बर्बादी घटाती है।", "ठिबक सिंचन पाणी थेट मुळांपर्यंत पोहोचवते आणि नासाडी कमी करते."],
+        ["Rain falls in only a few monsoon months in India, so storing it is vital.", "भारत में बारिश कुछ ही मानसून महीनों में होती है, इसलिए उसे जमा करना ज़रूरी है।", "भारतात पाऊस फक्त काही पावसाळी महिन्यांत पडतो, म्हणून तो साठवणे आवश्यक आहे."],
+        ["Greywater from basins and showers can be reused for plants and flushing.", "बेसिन और शावर का पानी पौधों और फ्लश में दोबारा इस्तेमाल हो सकता है।", "बेसिन व शॉवरचे पाणी झाडे व फ्लशसाठी पुन्हा वापरता येते."],
+        ["Groundwater levels fall when we pump out more than rain can refill.", "जब हम बारिश से भरने से ज़्यादा पानी निकालते हैं, तो भूजल स्तर गिरता है।", "पावसाने भरते त्यापेक्षा जास्त पाणी उपसले की भूजल पातळी खालावते."]];
+        function draw() {
+            fod.textContent = T(F[new Date().getDate() % F.length]);
+            sec.innerHTML = [1, 2, 3, 4, 5].map(i => `<article class="card"><h3>${T(S["n" + i])}</h3><p>${T(S["d" + i])}</p><div class="links"><a href="${pages[i]}">${T(S.hOpen)}: ${T(S["n" + i])}</a></div></article>`).join("");
+            tp.innerHTML = TOPICS.slice(0, 3).map(x => `<article class="card"><h3>${T(x[0])}</h3><p>${T(x[1])}</p>${linkRow(x[2], x[3])}</article>`).join("");
+        }
+        sf.onsubmit = e => { e.preventDefault(); const v = q.value.trim(); if (v) window.open(G(v + " water conservation"), "_blank", "noopener") };
+        document.querySelectorAll("[data-n]").forEach(el => { const n = +el.dataset.n; let c = 0; const t = setInterval(() => { c++; el.textContent = c + "%"; if (c >= n) clearInterval(t) }, Math.max(12, 900 / n)) });
+        setLang(LI);
     </script>
 </body>
 
