@@ -4,31 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quiz | Jal Sanrakshan</title>
+    <title>Jal Sanrakshan | Water Conservation Portal</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
     <header class="hero">
-        <h1>Test your knowledge</h1>
-        <p>Six questions with instant answers and a final score.</p>
+        <h1 data-t="qzH"></h1>
+        <p data-t="qzP"></p>
     </header>
     <main class="wrap">
         <div id="box"></div>
-        <p id="score" aria-live="polite"></p><button class="btn" id="re" style="display:none;margin-top:12px">Try
-            again</button>
+        <p id="score" aria-live="polite"></p><button class="btn" id="re" style="display:none;margin-top:12px"></button>
     </main>
     <script src="assets/common.js"></script>
     <script>
-        const Q = [["Which method sends rooftop rain into tanks or recharge pits?", ["Drip irrigation", "Rainwater harvesting", "Flood irrigation", "Desalination"], 1, "Rainwater harvesting collects and stores rain or recharges groundwater."],
-        ["Which irrigation method delivers water directly to plant roots?", ["Drip irrigation", "Canal flooding", "Surface spreading", "Sprinkling a lawn"], 0, "Drip systems release water drop by drop at the root zone."],
-        ["Which of these is greywater?", ["Toilet flush water", "Water from hand washing and bathing", "Sea water", "Sewage"], 1, "Greywater is lightly used water from basins, showers and laundry."],
-        ["Why are groundwater levels falling in many regions?", ["Too many lakes", "Extraction is higher than recharge", "Too much snowfall", "Water turns to air"], 1, "Pumping out more than rain refills drops the water table."],
-        ["Approximately how much of Earth's water is salty?", ["About 50%", "About 75%", "About 97%", "About 10%"], 2, "About 97% is ocean water. Only a small part is usable freshwater."],
-        ["Which scheme focuses on rural household tap water?", ["Jal Jeevan Mission", "Namami Gange", "Digital India", "Make in India"], 0, "Jal Jeevan Mission aims to provide tap water to rural households."]];
-        let sc, an;
-        function start() { sc = 0; an = 0; score.textContent = ""; re.style.display = "none"; box.innerHTML = ""; Q.forEach((q, i) => { const d = document.createElement("div"); d.className = "q"; d.innerHTML = `<b>Q${i + 1}. ${q[0]}</b>` + q[1].map((o, j) => `<button class="opt" data-i="${j}">${o}</button>`).join("") + `<div class="why"></div>`; d.querySelectorAll(".opt").forEach(b => b.onclick = () => { const p = +b.dataset.i; d.querySelectorAll(".opt").forEach((x, k) => { x.disabled = true; if (k === q[2]) x.classList.add("right") }); if (p !== q[2]) b.classList.add("wrong"); else sc++; const w = d.querySelector(".why"); w.style.display = "block"; w.textContent = (p === q[2] ? "Correct. " : "Not quite. ") + q[3]; an++; score.textContent = an === Q.length ? `Final score: ${sc} / ${Q.length}. ` + (sc >= 5 ? "Excellent!" : sc >= 3 ? "Good effort!" : "Revisit the Learn page and try again.") : `Score so far: ${sc} / ${an}`; if (an === Q.length) re.style.display = "inline-block" }); box.appendChild(d) }) }
-        re.onclick = () => { start(); scrollTo(0, 0) }; start();
+        const Q = [
+            {
+                q: ["Which method sends rooftop rain into tanks or recharge pits?", "कौन सा तरीका छत की बारिश को टैंक या रीचार्ज गड्ढे में भेजता है?", "कोणती पद्धत छतावरील पावसाचे पाणी टाकी किंवा पुनर्भरण खड्ड्यात नेते?"],
+                o: [["Drip irrigation", "ड्रिप सिंचाई", "ठिबक सिंचन"], ["Rainwater harvesting", "वर्षा जल संचयन", "पावसाचे पाणी साठवणे"], ["Flood irrigation", "बाढ़ सिंचाई (खेत में पानी भरना)", "पाट पाणी (शेतात पाणी भरणे)"], ["Desalination", "खारे पानी को मीठा करना", "खारे पाणी गोड करणे"]], a: 1,
+                w: ["Rainwater harvesting collects and stores rain or recharges groundwater.", "वर्षा जल संचयन बारिश को जमा करता है या भूजल को रीचार्ज करता है।", "पावसाचे पाणी साठवणे म्हणजे पाणी गोळा करणे किंवा भूजल पुनर्भरित करणे."]
+            },
+            {
+                q: ["Which irrigation method delivers water directly to plant roots?", "कौन सी सिंचाई विधि पानी सीधे पौधों की जड़ों तक पहुंचाती है?", "कोणती सिंचन पद्धत पाणी थेट झाडांच्या मुळांपर्यंत पोहोचवते?"],
+                o: [["Drip irrigation", "ड्रिप सिंचाई", "ठिबक सिंचन"], ["Canal flooding", "नहर से बाढ़ सिंचाई", "कालव्याने पाट पाणी"], ["Surface spreading", "सतह पर फैलाना", "पृष्ठभागावर पसरवणे"], ["Sprinkling a lawn", "लॉन पर छिड़काव", "लॉनवर फवारणी"]], a: 0,
+                w: ["Drip systems release water drop by drop at the root zone.", "ड्रिप प्रणाली जड़ों के पास बूंद-बूंद पानी देती है।", "ठिबक प्रणाली मुळांजवळ थेंब-थेंब पाणी देते."]
+            },
+            {
+                q: ["Which of these is greywater?", "इनमें से ग्रेवाटर कौन सा है?", "यापैकी ग्रेवॉटर कोणते?"],
+                o: [["Toilet flush water", "शौचालय का फ्लश पानी", "शौचालयाचे फ्लशचे पाणी"], ["Water from hand washing and bathing", "हाथ धोने और नहाने का पानी", "हात धुणे व आंघोळीचे पाणी"], ["Sea water", "समुद्र का पानी", "समुद्राचे पाणी"], ["Sewage", "गंदा नाली का पानी (सीवेज)", "सांडपाणी (गटाराचे)"]], a: 1,
+                w: ["Greywater is lightly used water from basins, showers and laundry.", "ग्रेवाटर बेसिन, शावर और कपड़े धोने का हल्का इस्तेमाल किया पानी है।", "ग्रेवॉटर म्हणजे बेसिन, शॉवर व कपडे धुण्याचे हलके वापरलेले पाणी."]
+            },
+            {
+                q: ["Why are groundwater levels falling in many regions?", "कई इलाकों में भूजल स्तर क्यों गिर रहा है?", "अनेक भागांत भूजल पातळी का खालावत आहे?"],
+                o: [["Too many lakes", "बहुत ज़्यादा झीलें", "खूप तलाव"], ["Extraction is higher than recharge", "निकासी रीचार्ज से ज़्यादा है", "उपसा पुनर्भरणापेक्षा जास्त आहे"], ["Too much snowfall", "बहुत ज़्यादा बर्फबारी", "खूप बर्फवृष्टी"], ["Water turns to air", "पानी हवा बन जाता है", "पाणी हवा बनते"]], a: 1,
+                w: ["Pumping out more than rain refills drops the water table.", "बारिश से जितना भरता है उससे ज़्यादा निकालने पर भूजल स्तर गिरता है।", "पावसाने भरते त्यापेक्षा जास्त उपसा केल्यास भूजल पातळी खालावते."]
+            },
+            {
+                q: ["Approximately how much of Earth's water is salty?", "पृथ्वी का लगभग कितना पानी खारा है?", "पृथ्वीवरील सुमारे किती पाणी खारट आहे?"],
+                o: [["About 50%", "लगभग 50%", "सुमारे 50%"], ["About 75%", "लगभग 75%", "सुमारे 75%"], ["About 97%", "लगभग 97%", "सुमारे 97%"], ["About 10%", "लगभग 10%", "सुमारे 10%"]], a: 2,
+                w: ["About 97% is ocean water. Only a small part is usable freshwater.", "लगभग 97% पानी समुद्र का है। उपयोग लायक मीठा पानी बहुत कम है।", "सुमारे 97% पाणी समुद्राचे आहे. वापरण्यायोग्य गोडे पाणी खूप कमी आहे."]
+            },
+            {
+                q: ["Which scheme focuses on rural household tap water?", "कौन सी योजना ग्रामीण घरों में नल जल पर केंद्रित है?", "कोणती योजना ग्रामीण घरांतील नळाच्या पाण्यावर केंद्रित आहे?"],
+                o: [["Jal Jeevan Mission", "जल जीवन मिशन", "जल जीवन मिशन"], ["Namami Gange", "नमामि गंगे", "नमामि गंगे"], ["Digital India", "डिजिटल इंडिया", "डिजिटल इंडिया"], ["Make in India", "मेक इन इंडिया", "मेक इन इंडिया"]], a: 0,
+                w: ["Jal Jeevan Mission aims to provide tap water to rural households.", "जल जीवन मिशन ग्रामीण घरों में नल से पानी पहुंचाने का लक्ष्य रखता है।", "जल जीवन मिशनचे उद्दिष्ट ग्रामीण घरांपर्यंत नळाने पाणी पोहोचवणे आहे."]
+            }];
+        let ans = Q.map(() => null);
+        function draw() {
+            box.innerHTML = Q.map((q, i) => `<div class="q"><b>${i + 1}. ${T(q.q)}</b>${q.o.map((o, j) => { let c = ""; if (ans[i] !== null) { if (j === q.a) c = " right"; else if (j === ans[i]) c = " wrong" } return `<button class="opt${c}" data-q="${i}" data-o="${j}" ${ans[i] !== null ? "disabled" : ""}>${T(o)}</button>` }).join("")}${ans[i] !== null ? `<div class="why">${T(ans[i] === q.a ? S.qCor : S.qWr)}${T(q.w)}</div>` : ""}</div>`).join("");
+            box.querySelectorAll(".opt").forEach(b => b.onclick = () => { ans[+b.dataset.q] = +b.dataset.o; draw() });
+            const n = ans.filter(x => x !== null).length, s = ans.filter((x, i) => x === Q[i].a).length;
+            score.textContent = !n ? "" : n === Q.length ? `${T(S.qFin)}: ${s} / ${Q.length}. ` + T(s >= 5 ? S.qEx : s >= 3 ? S.qGd : S.qRv) : `${T(S.qSo)}: ${s} / ${n}`;
+            re.style.display = n === Q.length ? "inline-block" : "none"; re.textContent = T(S.qRe);
+        }
+        re.onclick = () => { ans = Q.map(() => null); draw(); scrollTo(0, 0) };
+        setLang(LI);
     </script>
 </body>
 
