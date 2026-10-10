@@ -4,24 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Schemes | Jal Sanrakshan</title>
+    <title>Jal Sanrakshan | Water Conservation Portal</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
     <header class="hero">
-        <h1>Government initiatives</h1>
-        <p>Click a scheme to expand it, then open the official website or search more.</p>
+        <h1 data-t="scH"></h1>
+        <p data-t="scP"></p>
     </header>
     <main class="wrap">
         <div class="acc" id="acc"></div>
     </main>
     <script src="assets/common.js"></script>
     <script>
-        const s = [["Jal Shakti Abhiyan: Catch the Rain", "Campaign promoting rainwater harvesting and conservation across districts.", "https://jalshakti-dowr.gov.in"], ["Jal Jeevan Mission", "Aims to give safe tap water to rural households, with focus on source sustainability.", "https://jaljeevanmission.gov.in"], ["Atal Bhujal Yojana", "Sustainable groundwater management with community participation in water-stressed areas.", "https://cgwb.gov.in"], ["Amrit Sarovar Mission", "Develops and rejuvenates ponds in every district to store rain and recharge groundwater.", ""], ["Namami Gange", "Integrated programme to clean and protect the Ganga and its tributaries.", ""]];
-        const a = document.getElementById("acc");
-        a.innerHTML = s.map(x => `<button class="h" aria-expanded="false"><span>${x[0]}</span><span>+</span></button><div class="body"><p>${x[1]}</p><div class="links" style="margin-top:10px">${x[2] ? ext(x[2], "Official website") : ""}${ext(G(x[0]), "Google")}${ext(YT(x[0]), "YouTube")}</div></div>`).join("");
-        a.querySelectorAll(".h").forEach(b => b.onclick = () => { const o = b.classList.toggle("open"); b.setAttribute("aria-expanded", o); b.lastElementChild.textContent = o ? "-" : "+" });
+        const SC = [[["Jal Shakti Abhiyan: Catch the Rain", "जल शक्ति अभियान: कैच द रेन", "जलशक्ती अभियान: कॅच द रेन"], ["Campaign promoting rainwater harvesting and conservation across districts.", "जिलों में वर्षा जल संचयन और जल संरक्षण को बढ़ावा देने वाला अभियान।", "जिल्ह्यांमध्ये पावसाचे पाणी साठवणे व जलसंधारणाला चालना देणारे अभियान."], "https://jalshakti-dowr.gov.in"],
+        [["Jal Jeevan Mission", "जल जीवन मिशन", "जल जीवन मिशन"], ["Aims to give safe tap water to rural households, with focus on source sustainability.", "ग्रामीण घरों तक सुरक्षित नल जल पहुंचाने का लक्ष्य, जल स्रोतों की स्थिरता पर जोर।", "ग्रामीण घरांपर्यंत सुरक्षित नळाचे पाणी पोहोचवण्याचे उद्दिष्ट, जलस्रोतांच्या शाश्वततेवर भर."], "https://jaljeevanmission.gov.in"],
+        [["Atal Bhujal Yojana", "अटल भूजल योजना", "अटल भूजल योजना"], ["Sustainable groundwater management with community participation in water-stressed areas.", "पानी की कमी वाले इलाकों में समुदाय की भागीदारी से भूजल का सतत प्रबंधन।", "पाणीटंचाईच्या भागात समाजाच्या सहभागातून भूजलाचे शाश्वत व्यवस्थापन."], "https://cgwb.gov.in"],
+        [["Amrit Sarovar Mission", "अमृत सरोवर मिशन", "अमृत सरोवर मिशन"], ["Develops and rejuvenates ponds in every district to store rain and recharge groundwater.", "हर जिले में तालाब बनाना और पुनर्जीवित करना ताकि बारिश का पानी रुके और भूजल बढ़े।", "प्रत्येक जिल्ह्यात तलाव बांधणे व पुनरुज्जीवित करणे, जेणेकरून पावसाचे पाणी साठते व भूजल वाढते."], ""],
+        [["Namami Gange", "नमामि गंगे", "नमामि गंगे"], ["Integrated programme to clean and protect the Ganga and its tributaries.", "गंगा और उसकी सहायक नदियों को साफ और सुरक्षित रखने का एकीकृत कार्यक्रम।", "गंगा व तिच्या उपनद्या स्वच्छ व सुरक्षित ठेवण्याचा एकात्मिक कार्यक्रम."], ""]];
+        const op = new Set();
+        function draw() {
+            acc.innerHTML = SC.map((x, i) => `<button class="h ${op.has(i) ? "open" : ""}" data-k="${i}" aria-expanded="${op.has(i)}"><span>${T(x[0])}</span><span>${op.has(i) ? "-" : "+"}</span></button><div class="body"><p>${T(x[1])}</p><div class="links" style="margin-top:10px">${x[2] ? ext(x[2], T(S.of)) : ""}${ext(G(x[0][0]), T(S.g))}${ext(YT(x[0][0]), T(S.yt))}</div></div>`).join("");
+            acc.querySelectorAll(".h").forEach(b => b.onclick = () => { const k = +b.dataset.k; op.has(k) ? op.delete(k) : op.add(k); draw() })
+        }
+        setLang(LI);
     </script>
 </body>
 
