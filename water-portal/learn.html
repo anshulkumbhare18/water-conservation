@@ -4,28 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Learn | Jal Sanrakshan</title>
+    <title>Jal Sanrakshan | Water Conservation Portal</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
     <header class="hero">
-        <h1>Learn the methods</h1>
-        <p>Pick a method to see how it works, where it is used, and open more details online.</p>
+        <h1 data-t="learnH"></h1>
+        <p data-t="learnP"></p>
     </header>
     <main class="wrap">
-        <div class="tabs" id="tabs" role="tablist"></div>
-        <div class="panel" id="panel" aria-live="polite"></div>
+        <div class="tabs" id="tb" role="tablist"></div>
+        <div class="panel" id="pn" aria-live="polite"></div>
     </main>
     <script src="assets/common.js"></script>
     <script>
-        const m = [
-            { t: "Rainwater harvesting", w: "Rainwater_harvesting", q: "rainwater harvesting methods", what: "Collecting rain from rooftops and open land and storing it in tanks, or sending it underground to recharge wells.", how: ["Roof catches rain and gutters carry it to a filter", "Filtered water goes to a tank or recharge pit", "Excess water recharges the borewell or well"], use: "Homes, colleges, apartments, factories." },
-            { t: "Drip irrigation", w: "Drip_irrigation", q: "drip irrigation system how it works", what: "Delivers water slowly, drop by drop, directly to plant roots through pipes with small emitters.", how: ["Pump and filter feed a main pipe", "Lateral pipes run along crop rows", "Emitters release water at the root zone"], use: "Farms, orchards, gardens. Cuts evaporation and runoff." },
-            { t: "Greywater recycling", w: "Greywater", q: "greywater recycling system", what: "Reusing lightly used water from bathing, hand washing and laundry (not toilet water).", how: ["Collect water from basins, showers and washing machines", "Pass it through a filter or settling tank", "Use it for plants, flushing or cleaning"], use: "Hostels, hotels, housing societies, colleges." },
-            { t: "Watershed management", w: "Watershed_management", q: "watershed management India", what: "Managing land, soil and water of a whole catchment so rain soaks in and is stored.", how: ["Build contour bunds and check dams", "Plant trees and grass to hold soil", "Dig farm ponds and percolation tanks"], use: "Villages and drought-prone regions." },
-            { t: "Leak control", w: "Water_conservation", q: "how to save water at home", what: "Finding and fixing leaks, using efficient fixtures and tracking consumption.", how: ["Check taps, pipes and tanks regularly", "Install aerators and dual-flush systems", "Use meters to track use"], use: "Every home, school and office. The cheapest method." }];
-        makeTabs(document.getElementById("tabs"), m, x => { document.getElementById("panel").innerHTML = `<h2>${x.t}</h2><p>${x.what}</p><p><b>How it works</b></p><ul>${x.how.map(h => `<li>${h}</li>`).join("")}</ul><p><b>Where it is used:</b> ${x.use}</p><p style="margin:14px 0 8px"><b>Learn more online</b></p>${linkRow(x.q, x.w)}` });
+        const M = [
+            {
+                t: ["Rainwater harvesting", "वर्षा जल संचयन", "पावसाचे पाणी साठवणे"], q: "rainwater harvesting methods", k: "Rainwater_harvesting",
+                w: ["Collecting rain from rooftops and open land and storing it in tanks, or sending it underground to recharge wells.", "छतों और खुली जमीन पर गिरी बारिश को जमा करके टैंक में रखना, या जमीन के अंदर भेजकर कुएं और बोरवेल को रीचार्ज करना।", "छतावर आणि मोकळ्या जमिनीवर पडलेले पावसाचे पाणी गोळा करून टाकीत साठवणे, किंवा जमिनीत सोडून विहीर व बोअरवेल पुनर्भरित करणे."],
+                h: [["Roof catches rain and gutters carry it to a filter", "Filtered water goes to a tank or recharge pit", "Excess water recharges the borewell or well"], ["छत से बारिश का पानी पाइप से फिल्टर तक जाता है", "साफ पानी टैंक या रीचार्ज गड्ढे में जाता है", "बचा पानी बोरवेल या कुएं को रीचार्ज करता है"], ["छतावरील पाणी पाईपमधून फिल्टरकडे जाते", "गाळलेले पाणी टाकीत किंवा पुनर्भरण खड्ड्यात जाते", "उरलेले पाणी बोअरवेल किंवा विहिरीत मुरते"]],
+                u: ["Homes, colleges, apartments, factories.", "घर, कॉलेज, अपार्टमेंट, कारखाने।", "घरे, महाविद्यालये, अपार्टमेंट, कारखाने."]
+            },
+            {
+                t: ["Drip irrigation", "ड्रिप सिंचाई", "ठिबक सिंचन"], q: "drip irrigation system how it works", k: "Drip_irrigation",
+                w: ["Delivers water slowly, drop by drop, directly to plant roots through pipes with small emitters.", "पाइप और छोटे ड्रिपर से पानी सीधे पौधों की जड़ों में बूंद-बूंद पहुंचाना।", "पाईप व लहान ड्रिपरमधून पाणी थेट झाडांच्या मुळाशी थेंब-थेंब पोहोचवणे."],
+                h: [["Pump and filter feed a main pipe", "Lateral pipes run along crop rows", "Emitters release water at the root zone"], ["पंप और फिल्टर से मुख्य पाइप में पानी जाता है", "फसल की कतारों में छोटे पाइप बिछाए जाते हैं", "ड्रिपर जड़ों के पास पानी छोड़ते हैं"], ["पंप व फिल्टरमधून मुख्य पाईपमध्ये पाणी जाते", "पिकांच्या ओळींत लहान पाईप टाकले जातात", "ड्रिपर मुळांजवळ पाणी सोडतात"]],
+                u: ["Farms, orchards, gardens. Cuts evaporation and runoff.", "खेत, बाग-बगीचे। वाष्पीकरण और बर्बादी कम होती है।", "शेती, फळबागा, बागा. बाष्पीभवन व नासाडी कमी होते."]
+            },
+            {
+                t: ["Greywater recycling", "ग्रेवाटर पुनःउपयोग", "ग्रेवॉटर पुनर्वापर"], q: "greywater recycling system", k: "Greywater",
+                w: ["Reusing lightly used water from bathing, hand washing and laundry (not toilet water).", "नहाने, हाथ धोने और कपड़े धोने के हल्के इस्तेमाल किए पानी को (शौचालय का नहीं) दोबारा इस्तेमाल करना।", "आंघोळ, हात धुणे व कपडे धुण्यानंतरचे हलके वापरलेले पाणी (शौचालयाचे नाही) पुन्हा वापरणे."],
+                h: [["Collect water from basins, showers and washing machines", "Pass it through a filter or settling tank", "Use it for plants, flushing or cleaning"], ["बेसिन, शावर और वॉशिंग मशीन का पानी जमा करें", "फिल्टर या टंकी से छान लें", "पौधों, फ्लश या सफाई में इस्तेमाल करें"], ["बेसिन, शॉवर व वॉशिंग मशीनचे पाणी गोळा करा", "फिल्टर किंवा टाकीतून गाळून घ्या", "झाडे, फ्लश किंवा स्वच्छतेसाठी वापरा"]],
+                u: ["Hostels, hotels, housing societies, colleges.", "हॉस्टल, होटल, सोसायटी, कॉलेज।", "वसतिगृहे, हॉटेल, सोसायट्या, महाविद्यालये."]
+            },
+            {
+                t: ["Watershed management", "जलग्रहण क्षेत्र प्रबंधन", "पाणलोट क्षेत्र व्यवस्थापन"], q: "watershed management India", k: "Watershed_management",
+                w: ["Managing land, soil and water of a whole catchment so rain soaks in and is stored.", "पूरे जलग्रहण क्षेत्र की जमीन, मिट्टी और पानी का मिलकर प्रबंधन ताकि बारिश बहने के बजाय जमीन में रुके।", "संपूर्ण पाणलोट क्षेत्रातील जमीन, माती व पाण्याचे एकत्र व्यवस्थापन, जेणेकरून पाऊस वाहून न जाता जमिनीत मुरतो."],
+                h: [["Build contour bunds and check dams", "Plant trees and grass to hold soil", "Dig farm ponds and percolation tanks"], ["कंटूर बंड और चेक डैम बनाएं", "पेड़ और घास लगाकर मिट्टी रोकें", "खेत तालाब और रिसाव टैंक खोदें"], ["समपातळी बांध व बंधारे बांधा", "झाडे व गवत लावून माती धरून ठेवा", "शेततळी व मुरवण टाक्या खोदा"]],
+                u: ["Villages and drought-prone regions.", "गांव और सूखाग्रस्त इलाके।", "गावे व दुष्काळप्रवण भाग."]
+            },
+            {
+                t: ["Leak control", "रिसाव रोकथाम", "गळती नियंत्रण"], q: "how to save water at home", k: "Water_conservation",
+                w: ["Finding and fixing leaks, using efficient fixtures and tracking consumption.", "टपकते नल और पाइप ठीक करना, कम पानी वाले फिटिंग लगाना और खपत पर नजर रखना।", "गळणारे नळ व पाईप दुरुस्त करणे, कमी पाणी वापरणारी साधने बसवणे आणि वापरावर लक्ष ठेवणे."],
+                h: [["Check taps, pipes and tanks regularly", "Install aerators and dual-flush systems", "Use meters to track use"], ["नल, पाइप और टंकी की नियमित जांच करें", "एरेटर और डुअल-फ्लश लगाएं", "मीटर से खपत देखें"], ["नळ, पाईप व टाकी नियमित तपासा", "एरेटर व ड्युअल-फ्लश बसवा", "मीटरने वापर मोजा"]],
+                u: ["Every home, school and office. The cheapest method.", "हर घर, स्कूल और दफ्तर। सबसे सस्ता तरीका।", "प्रत्येक घर, शाळा व कार्यालय. सर्वात स्वस्त उपाय."]
+            }];
+        let cur = 0;
+        function draw() {
+            const x = M[cur]; tabs(tb, M.map(m => m.t), cur, i => { cur = i; draw() });
+            pn.innerHTML = `<h2>${T(x.t)}</h2><p>${T(x.w)}</p><p><b>${T(S.lHow)}</b></p><ul>${T(x.h).map(h => "<li>" + h + "</li>").join("")}</ul><p><b>${T(S.lUse)}</b> ${T(x.u)}</p><p style="margin:14px 0 8px"><b>${T(S.lMore)}</b></p>${linkRow(x.q, x.k)}`
+        }
+        setLang(LI);
     </script>
 </body>
 
