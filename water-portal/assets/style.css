@@ -25,10 +25,10 @@
 }
 
 body {
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: "Segoe UI", "Nirmala UI", "Noto Sans Devanagari", Roboto, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.65
+    line-height: 1.7
 }
 
 :focus-visible {
@@ -63,7 +63,8 @@ nav button {
     font-size: .9rem;
     background: none;
     border: 0;
-    cursor: pointer
+    cursor: pointer;
+    font-family: inherit
 }
 
 nav a:hover,
@@ -78,6 +79,17 @@ nav a.on {
     font-weight: 700
 }
 
+nav select {
+    padding: 6px 10px;
+    border-radius: 20px;
+    border: 2px solid var(--rip);
+    background: var(--card);
+    color: var(--text);
+    font-size: .9rem;
+    font-family: inherit;
+    cursor: pointer
+}
+
 .hero {
     background: linear-gradient(180deg, #0b2a3b, #0e6f8f);
     color: #fff;
@@ -85,9 +97,9 @@ nav a.on {
 }
 
 .hero h1 {
-    font-size: clamp(1.8rem, 5vw, 3.2rem);
-    max-width: 20ch;
-    line-height: 1.12
+    font-size: clamp(1.7rem, 5vw, 3rem);
+    max-width: 22ch;
+    line-height: 1.2
 }
 
 .hero p {
@@ -123,7 +135,8 @@ h2 {
     cursor: pointer;
     text-decoration: none;
     font-size: .95rem;
-    display: inline-block
+    display: inline-block;
+    font-family: inherit
 }
 
 .btn:hover {
@@ -143,7 +156,8 @@ h2 {
     padding: 12px 16px;
     border-radius: 30px;
     border: 0;
-    font-size: 1rem
+    font-size: 1rem;
+    font-family: inherit
 }
 
 .grid {
@@ -240,7 +254,8 @@ h2 {
     padding: 8px 16px;
     border-radius: 24px;
     cursor: pointer;
-    font-weight: 600
+    font-weight: 600;
+    font-family: inherit
 }
 
 .tabs button[aria-selected=true] {
@@ -283,7 +298,8 @@ h2 {
 .habits input {
     width: 20px;
     height: 20px;
-    accent-color: var(--sea)
+    accent-color: var(--sea);
+    flex: none
 }
 
 .habits .l {
@@ -363,7 +379,8 @@ h2 {
     margin-top: 10px;
     color: var(--text);
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    font-family: inherit
 }
 
 .acc .body {
@@ -402,7 +419,8 @@ h2 {
     border-radius: 8px;
     cursor: pointer;
     font-size: .97rem;
-    color: var(--text)
+    color: var(--text);
+    font-family: inherit
 }
 
 .opt:hover:not(:disabled) {
@@ -422,7 +440,6 @@ h2 {
 }
 
 .why {
-    display: none;
     margin-top: 10px;
     font-size: .93rem
 }
